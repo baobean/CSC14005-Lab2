@@ -1,0 +1,27 @@
+Step 1: Initial Data Analysis and Preprocessing Before selecting features from your train.csv data, you must understand the relationships and quality of the data.
+- Inspect the data: Check for data entry errors, missing values, and the coding of qualitative variables
+- Visualize: A scatterplot matrix should ALWAYS be drawn to assess the relationships between the response variable and predictors, and among the predictors themselves
+- Transformations: If the scatterplots reveal non-linear relationships or non-constant variance, consider transforming the response variable (e.g., using logarithms or the Box-Cox method) or the predictors (e.g., using polynomials or splines) before performing variable selection
+
+Step 2: Define the Justification for Feature Selection When justifying your model design, you must explain why you are selecting a subset of features rather than using the full model. Your framework should cite the following justifications:
+- Simplicity (Occam's Razor): The smallest model that adequately explains the data is preferred
+- Precision and Noise Reduction: Unnecessary predictors add noise and waste degrees of freedom. Removing them can increase the precision of your estimates and predictions
+- Mitigating Collinearity: Having too many variables doing the same job makes parameter estimates unstable. This can be diagnosed using Variance Inflation Factors (VIFs); removing redundant features aids in model interpretation
+- Cost Efficiency: If the model is for future prediction, you save time and resources by not measuring redundant predictors
+
+Step 3: Choose a Systematic Selection Method Avoid relying strictly on p-values to drop variables one-at-a-time, as multiple testing can severely overstate the significance of the remaining predictors. Instead, use criterion-based procedures that balance goodness-of-fit against model complexity
+- Evaluation Criteria:
+  + Adjusted R2: Penalizes for adding variables, but choosing the subset with the highest Adjusted R2 tends to overfit by selecting models that are larger than necessary
+  + Akaike’s Information Criterion (AIC): Balances lack of fit with a penalty for the number of parameters. It is highly recommended when prediction is the focus, though in very large samples, it may select overly complex models
+  + Bayes Information Criterion (BIC): Applies a heavier penalty for complexity than AIC. It is asymptotically consistent (it will select the correct true model if it exists as sample size grows) and often prefers simpler models, making it ideal if explanation is your primary goal
+- Search Algorithms:
+  + All Possible Subsets: If you have 30 or fewer features, use algorithms like "leaps and bounds" to evaluate every possible combination and find the absolute minimum AIC or BIC
+  + Stepwise Regression: For larger feature sets, use Forward Selection (starting empty and adding features that improve the criterion) or Backward Elimination (starting full and removing features)
+- Marginality Principle: If your model includes polynomials or interactions, ensure you respect the model hierarchy. Lower-order terms should never be removed if their higher-order relatives (like interaction terms) remain in the model
+
+Step 4: Model Diagnostics (Justifying Model Validity) Any inference or prediction is only as sound as the model on which it is based. Once you select a subset, you must justify that the linear regression assumptions hold:
+- Residual Plots: Plot standardized residuals against fitted values and against each predictor. A valid model will display a random scatter of points around the horizontal axis with constant variability. Any pattern (like a curve or funnel shape) indicates that an invalid model has been fit
+- Normality Checks: Plot the ordered standardized residuals in a Normal Q-Q plot. The points should fall closely along a straight line, which is necessary for valid confidence and prediction intervals
+- Outliers and Leverage Points: Use leverage values (h_ii) and Cook's Distance (D_i) to find unusual data points. Variable selection is highly sensitive to outliers and influential points; dropping even a single influential case can radically change which features are selected
+
+Step 5: Model Validation Because selection algorithms "search" the training data to find the best fit, the resulting model will appear to fit the training data better than it will fit new data, overstating its performance. To systematically justify the predictive ability of your chosen features, you must evaluate the model on unseen data. Use Cross-Validation (CV) by dividing your train.csv into folds (e.g., training on 9 folds and testing on the 10th). Calculate the Root Mean Square Error (RMSE) or average squared prediction error across the hold-out sets to prove that your subset minimizes actual prediction error rather than just fitting the noise in the training set.
