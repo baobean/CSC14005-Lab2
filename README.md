@@ -16,25 +16,25 @@ The raw dataset is stored in `data/raw/big_mart_sales.csv`, and prepared splits 
 
 ## Repository Contents
 
-```text
-.
-|-- EDA/
-|   `-- EDA.ipynb
-|-- Data_Preparation/
-|   `-- data_preparation.ipynb
-|-- Model/
-|   |-- feature_subset_selection.ipynb
-|   |-- interaction term model.ipynb
-|   |-- polynomial_feature_model.ipynb
-|   |-- transformed_variables_model.ipynb
-|   `-- saved_model/
-|-- application/
-|   `-- app.py
-|-- data/
-|   |-- raw/
-|   |-- train_data/
-|   `-- test_data/
-`-- requirements.txt
+```
+📦 Root
+├── 📁 EDA
+│   └── 📓 EDA.ipynb
+├── 📁 Data_Preparation
+│   └── 📓 data_preparation.ipynb
+├── 📁 Model
+│   ├── 📓 feature_subset_selection.ipynb
+│   ├── 📓 interaction term model.ipynb
+│   ├── 📓 polynomial_feature_model.ipynb
+│   ├── 📓 transformed_variables_model.ipynb
+│   └── 📁 saved_model
+├── 📁 application
+│   └── 📝 app.py
+├── 📁 data
+│   ├── 📁 raw
+│   ├── 📁 train_data
+│   └── 📁 test_data
+└── 📄 requirements.txt
 ```
 
 - `EDA/EDA.ipynb`: dataset understanding, variable inspection, and exploratory analysis.
