@@ -94,3 +94,7 @@ The app expects the following repository structure to remain unchanged:
 
 - Saved artifacts in `Model/saved_model/`
 - Prepared CSV files in `data/train_data/` and `data/test_data/`
+
+## Deployed App
+
+You can visit the app we have deployed on Streamlit Community Cloud [here](https://csc14005-lab2-group6.streamlit.app/).
